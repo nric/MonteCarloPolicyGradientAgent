@@ -2,7 +2,7 @@
 This is a Monte Carlo Policy Gradient algorithm written using TF2.0 keras and (somewhat) optimized to solve Open Ai Gym Lunar Lander.
 
 
-This is roughly in line with Move 37 Course Homework 8.6 but employs Tensorflow 2.0 with Keras backend.
+This is roughly in line with Move 37 Course Homework 8.6 but employs Tensorflow 2.0 with Keras nomenclature.
 
 As a reference with more explanation see: https://github.com/simoninithomas/Deep_reinforcement_learning_Course/blob/master/Policy%20Gradients/Cartpole/Cartpole%20REINFORCE%20Monte%20Carlo%20Policy%20Gradients.ipynb
 
