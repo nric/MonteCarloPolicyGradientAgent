@@ -1,5 +1,5 @@
 # MonteCarloPolicyGradientAgent
-This is a Monte Carlo Policy Gradient algorithm (somewhat) written using TF2.0 keras optimized to solve Open Ai Gym Lunar Lander.
+This is a Monte Carlo Policy Gradient algorithm written using TF2.0 keras and (somewhat) optimized to solve Open Ai Gym Lunar Lander.
 
 
 This is roughly in line with Move 37 Course Homework 8.6 but employs Tensorflow 2.0 with Keras backend.
