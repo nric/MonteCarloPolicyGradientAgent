@@ -1,5 +1,6 @@
 """
-This is a Monte Carlo Policy Gradient algorithm (somewhat) written using TF2.0 keras optimized to solve Open Ai Gym Lunar Lander.
+This is a Monte Carlo Policy Gradient algorithm written using TF2.0 keras and (somewhat) optimized to solve 
+Open Ai Gym Lunar Lander. But should be able to solve other gym envs with some hyperparameter adaptation.
 This is roughly in line with Move 37 Course Homework 8.6 but employs Tensorflow 2.0 with Keras backend.
 As a reference with more explanation see: https://github.com/simoninithomas/Deep_reinforcement_learning_Course/blob/master/Policy%20Gradients/Cartpole/Cartpole%20REINFORCE%20Monte%20Carlo%20Policy%20Gradients.ipynb
 Only minimal optimization was done, but I added multi step bellmen rollouts. However, did did not increase 
@@ -46,8 +47,8 @@ class MonteCarloPolicyGradient_Agent:
         among other the discounted rewards whcih are needed for the REINFORCE type PG update.
         2) Another way is to define two custom models. One, which only only does the prediction and one which does prediction and training.
         The latter also has a double input tensor for the state and the state and the discounted rewards as input and the actions as output.
-        3) The third option is the most concise but somewhat "a trick". It employs categorical cross entropy as loss. The latter is defined almost identical
-        to our REINFORCE Loss (L = - Sum(advantage_fkt(s|a) * LOG(policy(s|a)))) vs H(p,q)=sum(p_i*LOG(q_i)). So all that needs to be done is to 
+        3) The third option is the most concise but somewhat "a trick". It employs categorical cross entropy as loss. The latter function H is defined almost identically
+        to our REINFORCE Loss L (L = Sum(advantage_fkt(s|a) * LOG(policy(s|a)))) vs H(p,q)=sum(p_i*LOG(q_i)). So all that needs to be done is to 
         set the input p_i as the advantage function with one-hot (everythong zero except the taken action). --> H(p,q)=sum(advantage_fkt(s|a)*log(policy(s|a)))
         Here the Option 3 is implemented
         """
@@ -169,7 +170,9 @@ for episode in range(CYCLES):
         agent.add_sample(state,action_,reward)
         #if episode finished:
         if done:
+            #always discount and normalize
             agent.discount_and_normalize_rewards()
+            #train, if number of rollouts are complete
             if episode % MULTISTEP_BELLMAN_ROLLOUT == 0:
                 history = agent.train()
                 if episode % RENDER_EVERY_N == 0:
